@@ -65,6 +65,7 @@ async def test_command_status(dummy_context):
     assert len(results) == 1
     assert "【表情发送辅助插件状态】" in results[0]
     assert "🟢 开启" in results[0]
+    assert "/semoji" in results[0]
 
     await plugin.terminate()
 

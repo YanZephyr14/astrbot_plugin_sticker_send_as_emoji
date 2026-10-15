@@ -51,6 +51,8 @@ AstrBot 底层适配器在构建 OneBot 图片消息段时，原生只序列化�
 
 ## ⌨️ 管理指令
 
-- `/sticker status`：查看插件当前运行状态、补丁是否挂载、识别模式及表情目录索引。
-- `/sticker toggle`：快速开启或关闭表情发送模式。
-- `/sticker test`：发送一张内置测试小表情，验证 QQ 客户端是否以表情样式展示。
+指令组采用 `/semoji`（支持别名 `/emojisticker`、`/sticker_emoji`、`/表情样式`），与 `sticker_sense` 插件自带的 `/sticker` 彻底隔离，绝不冲突：
+
+- `/semoji status`（或 `/emojisticker status`）：查看插件当前运行状态、补丁是否挂载、识别模式及表情目录索引。
+- `/semoji toggle`：快速开启或关闭表情发送模式（状态将通过 KV 存储持久化，重启不失效）。
+- `/semoji test`：发送一张内置测试小表情，验证 QQ 客户端是否以表情样式展示。

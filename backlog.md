@@ -9,7 +9,7 @@
 - [x] **分层模块实现**
   - [x] 实现 `matcher.py`（多维度表情包识别匹配引擎：路径、属性、动图、上下文）
   - [x] 实现 `patcher.py`（对 `AiocqhttpMessageEvent` 及 `meme_manager` 的安全包装与干净卸载）
-  - [x] 实现 `main.py`（插件生命周期管理、配置装载与 `/sticker` 指令组）
+  - [x] 实现 `main.py`（插件生命周期管理、配置装载与 `/semoji` 指令组及别名隔离防冲突）
   - [x] 编写 `_conf_schema.json`（支持开关、sub_type 值、识别模式、GIF 判定、自定义目录、调试日志）
   - [x] 编写 `metadata.yaml`（规范声明平台、分类、版本等）
   - [x] 准备内置测试表情小图片素材

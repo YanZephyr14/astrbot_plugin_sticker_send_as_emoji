@@ -5,7 +5,7 @@
 针对 `astrbot_plugin_sticker_send_as_emoji` 插件的核心功能进行全面覆盖测试：
 - **匹配器单元测试** (`matcher.py`)：显式属性判定、meme_manager 路径判定、动图识别、模式切换（smart / meme_only / all_images）。
 - **补丁器单元测试** (`patcher.py`)：`_from_segment_to_dict` 注入、sub_type 保持既有值不覆盖、异常时放行容错、补丁挂载与卸载幂等性。
-- **插件主体集成测试** (`main.py`)：生命周期加载、配置解析与热变更响应、`/sticker` 指令触发（status, toggle, test）。
+- **插件主体集成测试** (`main.py`)：生命周期加载、配置解析与热变更响应、`/semoji` 指令触发（status, toggle, test）。
 
 ---
 

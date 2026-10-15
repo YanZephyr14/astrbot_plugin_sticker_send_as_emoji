@@ -45,6 +45,13 @@ class StickerSendAsEmojiPlugin(Star):
 
     async def initialize(self) -> None:
         """异步生命周期初始化：挂载底层消息转换补丁并建立联动。"""
+        try:
+            kv_enabled = await self.get_kv_data("enabled", None)
+            if kv_enabled is not None:
+                self.patcher.enabled = bool(kv_enabled)
+        except Exception:
+            pass
+
         self.patcher.install()
         logger.info(
             f"[sticker_send_as_emoji] 插件已就绪！当前识别模式: {self.matcher.mode}, "
@@ -80,12 +87,15 @@ class StickerSendAsEmojiPlugin(Star):
 
     # ──────────────── 指令组管理 ────────────────
 
-    @filter.command_group("sticker")
-    def sticker(self) -> None:
-        """表情标记辅助工具指令组"""
+    @filter.command_group(
+        "semoji",
+        alias={"emojisticker", "sticker_emoji", "表情样式", "表情形态"},
+    )
+    def semoji(self) -> None:
+        """表情标记辅助工具指令组（与 sticker_sense 严格隔离避免冲突）"""
         pass
 
-    @sticker.command("status")
+    @semoji.command("status")
     async def status(self, event: AstrMessageEvent) -> Any:
         """查看表情按表情发送当前运行状态与配置"""
         from .patcher import _PATCH_INSTALLED
@@ -101,14 +111,19 @@ class StickerSendAsEmojiPlugin(Star):
             f"• 识别模式: {self.matcher.mode}\n"
             f"• GIF视为表情: {'是' if self.matcher.treat_gif_as_emoji else '否'}\n"
             f"• meme_manager联动: {'✅ 深度联动已激活' if meme_hooked else 'ℹ️ 基于路径与上下文感知'}\n"
-            f"• 已索引表情目录数: {known_count} 个"
+            f"• 已索引表情目录数: {known_count} 个\n"
+            "💡 可用指令: /semoji status, /semoji toggle, /semoji test (支持别名 /emojisticker, /表情样式)"
         )
         yield event.plain_result(msg)
 
-    @sticker.command("toggle")
+    @semoji.command("toggle")
     async def toggle(self, event: AstrMessageEvent) -> Any:
-        """快速切换表情发送辅助插件的启用/禁用状态"""
+        """快速切换表情发送辅助插件的启用/禁用状态并持久化"""
         self.patcher.enabled = not self.patcher.enabled
+        try:
+            await self.put_kv_data("enabled", self.patcher.enabled)
+        except Exception:
+            pass
         state_str = (
             "🟢 开启 (表情将以小图/可长按收藏发送)"
             if self.patcher.enabled
@@ -116,7 +131,7 @@ class StickerSendAsEmojiPlugin(Star):
         )
         yield event.plain_result(f"已切换状态为: {state_str}")
 
-    @sticker.command("test")
+    @semoji.command("test")
     async def test(self, event: AstrMessageEvent) -> Any:
         """发送一张测试表情图片，验证 QQ 客户端是否以表情样式呈现"""
         assets_path = Path(__file__).parent / "assets" / "test_sticker.png"

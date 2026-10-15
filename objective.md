@@ -24,5 +24,5 @@ AstrBot 原生适配层（`AiocqhttpMessageEvent._from_segment_to_dict`）在将
    遵循防御性编程，对底层消息转换打补丁时全面捕获异常并放行兜底；若出现任何未预期情况，宁可发成普通大图，也绝对不阻断消息发送或抛出未捕获异常。
 5. **完整生命周期与热重载支持**：
    插件挂载补丁时具备幂等性（重复加载不重复包装）；插件停用或热重载卸载时（`terminate`）将所有补丁干净还原，对主程序零残留污染。
-6. **提供便捷调试与测试指令**：
-   提供 `/sticker status`、`/sticker test`、`/sticker toggle` 指令，方便管理员快速验证当前标记状态与协议端连通表现。
+6. **提供便捷调试与测试指令（严格防冲突）**：
+   提供 `/semoji status`、`/semoji test`、`/semoji toggle` 指令（别名 `/emojisticker`、`/表情样式`），与 `sticker_sense` 的 `/sticker` 完全隔离，方便管理员快速验证当前标记状态与协议端连通表现。
