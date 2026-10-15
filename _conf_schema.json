@@ -1,0 +1,39 @@
+{
+  "enabled": {
+    "description": "启用表情发送模式",
+    "type": "bool",
+    "hint": "开启后，机器人发送的表情将以 QQ「表情」形式呈现（小图、紧凑、可长按收藏），而不是撑满气泡的大图。关闭后恢复默认大图行为。",
+    "default": true
+  },
+  "sub_type": {
+    "description": "表情标记值 (sub_type)",
+    "type": "int",
+    "hint": "OneBot V11 协议中图片消息段的 sub_type 字段。1 为表情（贴纸小图），0 为普通大图。通常保持默认值 1 即可。",
+    "default": 1
+  },
+  "mode": {
+    "description": "表情识别模式",
+    "type": "string",
+    "hint": "smart (智能识别，推荐): 自动识别来自 meme_manager、动图 GIF 及显式打标的图片；meme_only: 仅识别来自 meme_manager 的表情包；all_images: 所有发出的图片一律作为表情。",
+    "options": ["smart", "meme_only", "all_images"],
+    "default": "smart"
+  },
+  "treat_gif_as_emoji": {
+    "description": "GIF 动图自动视为表情",
+    "type": "bool",
+    "hint": "在智能模式下，是否将所有 .gif 动图自动作为表情包发送。在社交语境下动图绝大多数为表情贴纸。",
+    "default": true
+  },
+  "extra_dirs": {
+    "description": "自定义表情目录路径列表",
+    "type": "list",
+    "hint": "若有自定义的表情图库文件夹，可将目录绝对路径或相对路径填入此列表中，该目录下的图片在发送时将自动识别为表情。",
+    "default": []
+  },
+  "debug": {
+    "description": "调试日志",
+    "type": "bool",
+    "hint": "是否在后台控制台打印表情拦截与 sub_type 标记详情日志，排查问题时开启。",
+    "default": false
+  }
+}

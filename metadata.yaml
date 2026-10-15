@@ -1,0 +1,23 @@
+name: "astrbot_plugin_sticker_send_as_emoji"
+display_name: "表情按「表情」发 (Sticker Send As Emoji)"
+short_desc: "让机器人发的表情以 QQ「表情」形式呈现（小图、紧凑、可长按收藏），而不是撑满气泡的大图。"
+desc: |
+  让机器人发送的表情以 QQ 原生「表情」形式呈现，而不是一张撑满气泡的大图。
+  - 核心机理：针对 OneBot V11 / QQ 个人号底层适配器，在图片段精准注入 sub_type=1；
+  - 零侵入无缝配合 meme_manager：自动感知 meme_manager 图库、上下文与临时表情文件；
+  - 智能过滤防误伤：区分表情包与普通相册照片/AI绘画大图；
+  - 异常安全隔离：出现任何未知异常自动放行降级为普通图片，绝不阻断正常聊天；
+  - 纯净生命周期：支持动态启用/停用与热重载，卸载时完整还原底层方法。
+version: "1.0.0"
+author: "YanZephyr14 & AstrBot Community"
+repo: "https://github.com/YanZephyr14/astrbot_plugin_sticker_send_as_emoji"
+astrbot_version: ">=4.5.0"
+support_platforms:
+  - aiocqhttp
+category: "实用工具"
+tags:
+  - sticker
+  - emoji
+  - meme
+  - onebot
+  - qq
